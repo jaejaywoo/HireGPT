@@ -1,0 +1,14 @@
+{
+  "name": "HireGPT",
+  "version": "0.0.1",
+  "description": "Job application made easy with HireGPT 😎 Powered by OpenAI GPT model.",
+  "main": "main.js",
+  "author": "Hyunjae Woo",
+  "license": "MIT",
+  "scripts": {
+    "start": "electron ."
+  },
+  "devDependencies": {
+    "electron": "^23.0.0"
+  }
+}

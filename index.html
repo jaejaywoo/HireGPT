@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=DM Sans">
+    <link href="styles.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+    <!-- API Key page -->
+    <div id="api-key-page" class="center">
+        <div class="center"><h1 id="name">HireGPT</h1></div>
+        <br><br>
+        <label for="api-key-txt" id="api-key-label">Your OpenAI API key</label>
+        <input type="text" id="api-key-txt">
+        <button id="api-key-btn" type="submit">Apply</button>
+    </div>
+
+    <!-- Main page -->
+    <div id="main-page" class="center">
+        <div class="center"><h1 id="name">HireGPT</h1></div>
+        <!-- <div id="nav-bar" class="center">
+            <button>Cover Letter</button>
+            <button>Why</button>
+        </div> -->
+        <div id="main-sub-page">
+            <!-- Generated prompt -->
+            <div id="answer">Generated output will be displayed here</div>
+            <!-- User & company info -->
+            <div id="info-section">
+                <label for="company-info">Company Name</label>
+                <input type="text" id="company-info">
+                <br><br>
+                <label for="user-background">Your Background</label>
+                <textarea id="user-background" rows="5" cols="50"></textarea>
+                <br><br>
+                <label for="job-position">Job Position</label>
+                <input type="text" id="job-position">
+                <button id="generate-btn" type="submit">Generate</button>
+                <button id="go-back-btn">Go back</button>
+            </div>
+        </div>
+    </div>
+    <script src="./renderer.js"></script>
+</body>
+</html>

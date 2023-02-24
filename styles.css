@@ -1,0 +1,121 @@
+body {
+    background-color: #f0f5f5;
+    font-family: 'DM Sans', sans-serif;
+}
+
+#api-key-page {
+    margin: auto;
+    width: 50%;
+}
+
+#api-key-txt {
+    width: 100%;
+    padding: 10px;
+    font-size: 15px;
+    border: 1px solid #123693;
+    background-color: #f0f5f5;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+#main-page {
+    display: none;
+    margin: auto;
+    width: 90%;
+}
+
+#main-sub-page {
+    display: flex;
+}
+
+.center {
+    margin: auto;
+    width: 80%;
+}
+
+h1, #name {
+    text-align: center;
+    color: #123693;
+    font-size: 80px;
+    margin-top: 50px;
+    margin-bottom: 40px;
+}
+
+label {
+    display: block;
+    margin-bottom: 10px;
+    font-size: 20px;
+    color: #123693;
+}
+
+textarea {
+    width: 100%;
+    height: 150px;
+    padding: 10px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 15px;
+    color: #123693;
+    border: 1px solid #123693;
+    background-color: #f0f5f5;
+    border-radius: 5px;
+    box-sizing: border-box;
+    resize: vertical;
+    /* margin-bottom: 10px; */
+}
+
+button[type="submit"]:hover {
+    background-color: #d8e7fc;
+}
+
+button[type="submit"] {
+    width: 100%;
+    padding: 10px;
+    background-color: #d2e4ff;
+    color: #123693;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 18px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+#go-back-btn {
+    padding: 5px;
+    font-family: 'DM Sans', sans-serif;
+    background-color: #f0f5f5;
+    color: #123693;
+    font-size: 14px;
+    border: none;
+    margin-top: 5px;
+    cursor: pointer;
+}
+
+#go-back-btn:hover {
+    color: #6384d8;
+}
+
+input {
+    width: 100%;
+    padding: 10px;
+    font-size: 15px;
+    color: #123693;
+    border: 1px solid #123693;
+    background-color: #f0f5f5;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+#answer {
+    width: 50%;
+    font-size: 16px;
+    color: #62729cc3;
+    background-color: #f0f5f5;
+    border-radius: 5px;
+    margin-right: 20px;
+    word-wrap: break-word;
+}
+
+#info-section {
+    flex-grow: 1;
+}
