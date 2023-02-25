@@ -34,7 +34,7 @@ async function onClickGoBackButton() {
     let apiKeyPage = document.getElementById("api-key-page");
     mainPage.style.display = "none";
     apiKeyPage.style.display = "block";
-};
+}
 
 async function onClickGenerateButton() {
     // Prep company & user info
@@ -61,7 +61,7 @@ async function onClickGenerateButton() {
         console.log(`Company Info: ${company_info}`);
         console.log(`Prompt: ${prompt}`);
     }
-};
+}
 
 async function requestCompletion(prompt) {
     try {
@@ -78,7 +78,7 @@ async function requestCompletion(prompt) {
         console.log(e);
         alert(e);
     }
-};
+}
 
 function getRequestOptions(prompt) {
     const params = {
@@ -97,7 +97,7 @@ function getRequestOptions(prompt) {
         body: JSON.stringify(params)
     }
     return requestOptions
-};
+}
 
 function createParagraphs(text) {
     let answerDiv = document.getElementById('answer');
@@ -110,7 +110,7 @@ function createParagraphs(text) {
         p.innerHTML = texts[i];
         answerDiv.appendChild(p);
     }
-};
+}
 
 function handleErrors(response) {
     switch (response.status) {
@@ -123,7 +123,7 @@ function handleErrors(response) {
         default:
             throw new Error(`Error occurred (error code: ${response.status})`);
     }
-};
+}
 
 function generatePrompt_v1(company_info) {
     return "Using the following company information and my background, " +
@@ -132,7 +132,7 @@ function generatePrompt_v1(company_info) {
     `${company_info}` +
     "\nMy background:\n" +
     `${USER_BACKGROUND}`
-};
+}
 
 function generatePrompt_v2() {
     return `Think about the mission statement of ${COMPANY_NAME} ` +
@@ -140,4 +140,4 @@ function generatePrompt_v2() {
     `The cover letter must align the mission of ${COMPANY_NAME} ` +
     "with my background provided below:\n" +
     `${USER_BACKGROUND}`
-};
+}
