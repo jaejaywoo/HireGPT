@@ -1,4 +1,7 @@
 const apiSubmitButton = document.getElementById("api-key-btn");
+var currentWriting = null;
+var coverLetterButton = null;
+var whyUsButton = null;
 var generateButton = null;
 var goBackButton = null;
 
@@ -16,18 +19,42 @@ apiSubmitButton.addEventListener("click", async event => {
     mainPage.style.display = "block";
     apiKeyPage.style.display = "none";
 
+    // Cover letter button click
+    coverLetterButton = waitUntilLoad('cover-letter-btn');
+    coverLetterButton.addEventListener('click', selectCoverLetterBtn);
+
+    // Why button click
+    whyUsButton = waitUntilLoad('why-us-btn');
+    whyUsButton.addEventListener('click', selectWhyUsBtn);
+
     // Generate button click
-    do {
-        generateButton = document.getElementById("generate-btn");
-    } while (generateButton == null);
+    generateButton = waitUntilLoad('generate-btn');
     generateButton.addEventListener("click", onClickGenerateButton);
 
     // Go back button click
-    do {
-        goBackButton = document.getElementById("go-back-btn");
-    } while (goBackButton == null);
+    goBackButton = waitUntilLoad('go-back-btn');
     goBackButton.addEventListener("click", onClickGoBackButton);
 });
+
+function selectCoverLetterBtn() {
+    coverLetterButton.style.backgroundColor = "#9cc0f7";
+    whyUsButton.style.backgroundColor = "#d2e4ff";
+    currentWriting = 'cover-letter';
+}
+
+function selectWhyUsBtn() {
+    coverLetterButton.style.backgroundColor = "#d2e4ff";
+    whyUsButton.style.backgroundColor = "#9cc0f7";
+    currentWriting = 'why-us';
+}
+
+function waitUntilLoad(id) {
+    let ele = null;
+    do {
+        ele = document.getElementById(id);
+    } while (ele == null);
+    return ele;
+}
 
 async function onClickGoBackButton() {
     let mainPage = document.getElementById("main-page");

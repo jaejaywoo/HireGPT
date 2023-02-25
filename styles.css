@@ -63,6 +63,50 @@ textarea {
     /* margin-bottom: 10px; */
 }
 
+/* ------------------- Nav Bar ------------------- */
+#nav-bar {
+    display: flex;
+    flex-direction: row;
+    /* justify-content: space-evenly; */
+    height: 40px;
+    margin-bottom: 30px;
+}
+
+#nav-intro {
+    display: flex;
+    align-items: center;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 18px;
+    color: #123693;
+}
+
+#nav-bar button {
+    /* height: 40px; */
+    padding: 10px;
+    font-family: 'DM Sans', sans-serif;
+    background-color: #d2e4ff;
+    color: #123693;
+    font-size: 15px;
+    border: none;
+    margin-left: 10px;
+    margin-right: 10px;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+#nav-bar button:hover {
+    background-color: #d8e7fc;
+}
+
+#nav-bar button:focus {
+    background-color: #9cc0f7;
+}
+
+/* ------------------- Info Section ------------------- */
+#info-section {
+    flex-grow: 1;
+}
+
 button[type="submit"]:hover {
     background-color: #d8e7fc;
 }
@@ -114,8 +158,4 @@ input {
     border-radius: 5px;
     margin-right: 20px;
     word-wrap: break-word;
-}
-
-#info-section {
-    flex-grow: 1;
 }
