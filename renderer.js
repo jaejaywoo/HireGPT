@@ -77,7 +77,7 @@ async function onClickGenerateButton() {
     if (!COMPANY_NAME) {
         alert('⚠️ You did not specify the company name! Please write the name of the company.');
     } else if (!ROLE_DESCRIPTION) {
-        alert('⚠️ The role description section is missing! Please tell us more about the role you are applying for.')
+        alert('⚠️ The role description section is missing! Please tell us more about the role you are applying for.');
     } else if (!USER_BACKGROUND) {
         alert('⚠️ You forgot to tell me your background! I cannot generate text without knowing who you are. Please write a brief summary of your background.');
     } else if (!JOB_POSITION) {
@@ -87,8 +87,17 @@ async function onClickGenerateButton() {
         // let prompt = `Say this is a test.`;
 
         // Get response from OpenAPI
-        let company_info = await requestCompletion(`What is the mission statement of ${COMPANY_NAME}? Give me a brief summary.`);
-        let prompt = generateCoverLetterPrompt(company_info);
+        let prompt = null;
+        if (currentWriting == "cover-letter") {
+            let company_info = await requestCompletion(`What is the mission statement of ${COMPANY_NAME}? Give me a brief summary.`);
+            prompt = generateCoverLetterPrompt(company_info);
+        } else if (currentWriting == "why-us") {
+            let company_info = await requestCompletion(`What is the mission statement of ${COMPANY_NAME}? Give me a brief summary.`);
+            prompt = generateWhyUsPrompt(company_info);
+        } else {
+            alert('⚠️ Unknown writing format!');
+        }
+
         let response = await requestCompletion(prompt);
         createParagraphs(response);
 
