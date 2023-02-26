@@ -83,9 +83,6 @@ async function onClickGenerateButton() {
     } else if (!JOB_POSITION) {
         alert('⚠️ You did not specify which position you are applying for! Please write down the job position.');
     } else {
-        // let prompt = generatePrompt();
-        // let prompt = `Say this is a test.`;
-
         // Get response from OpenAPI
         let prompt = null;
         if (currentWriting == "cover-letter") {
