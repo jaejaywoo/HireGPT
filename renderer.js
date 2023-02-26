@@ -86,9 +86,7 @@ async function onClickGenerateButton() {
         // Get response from OpenAPI
         let prompt = null;
         if (currentWriting == "cover-letter") {
-            // TODO: Use role description
-            let company_info = await requestCompletion(`What is the mission statement of ${COMPANY_NAME}? Give me a brief summary.`);
-            prompt = generateCoverLetterPrompt(company_info);
+            prompt = generateCoverLetterPrompt();
         } else if (currentWriting == "why-us") {
             prompt = generateWhyUsPrompt();
         } else {
@@ -164,12 +162,11 @@ function handleErrors(response) {
     }
 }
 
-function generateCoverLetterPrompt(company_info) {
-    return "Using the following company information and my background, " +
-    `write a professional cover letter for ${JOB_POSITION} role to Hiring Manager.` +
-    "\nCompany information:\n" +
-    `${company_info}` +
-    "\nMy background:\n" +
+function generateCoverLetterPrompt() {
+    return `Write a professional cover letter for the ${JOB_POSITION} position at ${COMPANY_NAME}.` +
+    "\n\nHere is the role description:\n" +
+    `${ROLE_DESCRIPTION}` +
+    "\n\nThis is my background:\n" +
     `${USER_BACKGROUND}`
 }
 
