@@ -7,6 +7,7 @@ var goBackButton = null;
 
 var API_KEY_INFO = null;
 var COMPANY_NAME = null;
+var ROLE_DESCRIPTION = null;
 var USER_BACKGROUND = null;
 var JOB_POSITION = null;
 
@@ -69,11 +70,14 @@ async function onClickGoBackButton() {
 async function onClickGenerateButton() {
     // Prep company & user info
     COMPANY_NAME = document.getElementById("company-info").value;
+    ROLE_DESCRIPTION = document.getElementById("role-description").value;
     USER_BACKGROUND = document.getElementById("user-background").value;
     JOB_POSITION = document.getElementById("job-position").value;
 
     if (!COMPANY_NAME) {
         alert('⚠️ You did not specify the company name! Please write the name of the company.');
+    } else if (!ROLE_DESCRIPTION) {
+        alert('⚠️ The role description section is missing! Please tell us more about the role you are applying for.')
     } else if (!USER_BACKGROUND) {
         alert('⚠️ You forgot to tell me your background! I cannot generate text without knowing who you are. Please write a brief summary of your background.');
     } else if (!JOB_POSITION) {
