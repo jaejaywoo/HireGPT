@@ -27,6 +27,9 @@ apiSubmitButton.addEventListener("click", async event => {
     whyUsButton = waitUntilLoad('why-us-btn');
     whyUsButton.addEventListener('click', selectWhyUsBtn);
 
+    // Default
+    selectCoverLetterBtn();
+
     // Generate button click
     generateButton = waitUntilLoad('generate-btn');
     generateButton.addEventListener("click", onClickGenerateButton);
@@ -37,14 +40,14 @@ apiSubmitButton.addEventListener("click", async event => {
 });
 
 function selectCoverLetterBtn() {
-    coverLetterButton.style.backgroundColor = "#9cc0f7";
+    coverLetterButton.style.backgroundColor = "#9cc0f7";  // selected
     whyUsButton.style.backgroundColor = "#d2e4ff";
     currentWriting = 'cover-letter';
 }
 
 function selectWhyUsBtn() {
     coverLetterButton.style.backgroundColor = "#d2e4ff";
-    whyUsButton.style.backgroundColor = "#9cc0f7";
+    whyUsButton.style.backgroundColor = "#9cc0f7";  // selected
     currentWriting = 'why-us';
 }
 
@@ -81,7 +84,7 @@ async function onClickGenerateButton() {
 
         // Get response from OpenAPI
         let company_info = await requestCompletion(`What is the mission statement of ${COMPANY_NAME}? Give me a brief summary.`);
-        let prompt = generatePrompt_v1(company_info);
+        let prompt = generateCoverLetterPrompt(company_info);
         let response = await requestCompletion(prompt);
         createParagraphs(response);
 
@@ -152,7 +155,7 @@ function handleErrors(response) {
     }
 }
 
-function generatePrompt_v1(company_info) {
+function generateCoverLetterPrompt(company_info) {
     return "Using the following company information and my background, " +
     `write a professional cover letter for ${JOB_POSITION} role to Hiring Manager.` +
     "\nCompany information:\n" +
@@ -161,10 +164,19 @@ function generatePrompt_v1(company_info) {
     `${USER_BACKGROUND}`
 }
 
-function generatePrompt_v2() {
-    return `Think about the mission statement of ${COMPANY_NAME} ` +
-    `and write a professional cover letter for ${JOB_POSITION} role. ` +
-    `The cover letter must align the mission of ${COMPANY_NAME} ` +
-    "with my background provided below:\n" +
+function generateWhyUsPrompt(company_info) {
+    return `Explain why I would be a great fit for the ${JOB_POSITION} position at ${COMPANY_NAME}.` +
+    "\nThis is the company description:\n" +
+    `${company_info}` +
+    "\nHere is my background:\n" +
     `${USER_BACKGROUND}`
+
 }
+
+// function generatePrompt_v2() {
+//     return `Think about the mission statement of ${COMPANY_NAME} ` +
+//     `and write a professional cover letter for ${JOB_POSITION} role. ` +
+//     `The cover letter must align the mission of ${COMPANY_NAME} ` +
+//     "with my background provided below:\n" +
+//     `${USER_BACKGROUND}`
+// }
