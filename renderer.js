@@ -86,11 +86,11 @@ async function onClickGenerateButton() {
         // Get response from OpenAPI
         let prompt = null;
         if (currentWriting == "cover-letter") {
+            // TODO: Use role description
             let company_info = await requestCompletion(`What is the mission statement of ${COMPANY_NAME}? Give me a brief summary.`);
             prompt = generateCoverLetterPrompt(company_info);
         } else if (currentWriting == "why-us") {
-            let company_info = await requestCompletion(`What is the mission statement of ${COMPANY_NAME}? Give me a brief summary.`);
-            prompt = generateWhyUsPrompt(company_info);
+            prompt = generateWhyUsPrompt();
         } else {
             alert('⚠️ Unknown writing format!');
         }
@@ -98,7 +98,6 @@ async function onClickGenerateButton() {
         let response = await requestCompletion(prompt);
         createParagraphs(response);
 
-        console.log(`Company Info: ${company_info}`);
         console.log(`Prompt: ${prompt}`);
     }
 }
@@ -174,11 +173,11 @@ function generateCoverLetterPrompt(company_info) {
     `${USER_BACKGROUND}`
 }
 
-function generateWhyUsPrompt(company_info) {
+function generateWhyUsPrompt() {
     return `Explain why I would be a great fit for the ${JOB_POSITION} position at ${COMPANY_NAME}.` +
-    "\nThis is the company description:\n" +
-    `${company_info}` +
-    "\nHere is my background:\n" +
+    "\n\nThis is the role description:\n" +
+    `${ROLE_DESCRIPTION}` +
+    "\n\nHere is my background:\n" +
     `${USER_BACKGROUND}`
 
 }
