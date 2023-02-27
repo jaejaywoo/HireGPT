@@ -111,6 +111,7 @@ textarea {
 /* ------------------- Info Section ------------------- */
 #info-section {
     flex-grow: 1;
+    color: #123693;
 }
 
 button[type="submit"]:hover {
@@ -145,7 +146,7 @@ button[type="submit"] {
     color: #6384d8;
 }
 
-input {
+input[type=text] {
     width: 100%;
     padding: 10px;
     font-size: 15px;
