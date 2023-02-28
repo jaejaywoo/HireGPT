@@ -2,6 +2,7 @@ const apiSubmitButton = document.getElementById("api-key-btn");
 var currentWriting = null;
 var coverLetterButton = null;
 var whyUsButton = null;
+var uploadResumeButton = null;
 var generateButton = null;
 var goBackButton = null;
 
@@ -31,6 +32,9 @@ apiSubmitButton.addEventListener("click", async event => {
     // Default
     selectCoverLetterBtn();
 
+    uploadResumeButton = waitUntilLoad('upload-resume');
+    uploadResumeButton.addEventListener('change', uploadResume);
+
     // Generate button click
     generateButton = waitUntilLoad('generate-btn');
     generateButton.addEventListener("click", onClickGenerateButton);
@@ -50,6 +54,12 @@ function selectWhyUsBtn() {
     coverLetterButton.style.backgroundColor = "#d2e4ff";
     whyUsButton.style.backgroundColor = "#9cc0f7";  // selected
     currentWriting = 'why-us';
+}
+
+async function uploadResume() {
+    const file = this.files[0];
+    let text = await file.text();
+    console.log(text);
 }
 
 function waitUntilLoad(id) {
