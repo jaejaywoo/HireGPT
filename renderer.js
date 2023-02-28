@@ -57,9 +57,34 @@ function selectWhyUsBtn() {
 }
 
 async function uploadResume() {
-    const file = this.files[0];
-    let text = await file.text();
-    console.log(text);
+    // const file = this.files[0];
+    // let text = await file.text();
+    // console.log(text);
+
+    // TODO: cannot make connection with the backend.
+    // Try https://github.com/megasanjay/electron-flask
+    try {
+        const obj = {name: "John", age: 30, city: "New York"};
+        const requestOptions = {
+            method: "POST", // or 'PUT'
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(obj),
+        }
+
+        let response = await fetch('http://127.0.0.1:5000/test', requestOptions);
+        if (response.ok) {
+            // let data = await response.json();
+            console.log("Backend says:", response.data);
+        } else {
+            handleErrors(response);
+        }
+    } catch (e) {
+        console.log(e);
+        alert(e);
+    }
+
 }
 
 function waitUntilLoad(id) {
