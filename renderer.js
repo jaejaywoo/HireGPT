@@ -1,4 +1,7 @@
+const SERVER_URL = "http://127.0.0.1:5000";
+
 const apiSubmitButton = document.getElementById("api-key-btn");
+
 var currentWriting = null;
 var coverLetterButton = null;
 var whyUsButton = null;
@@ -63,27 +66,14 @@ async function uploadResume() {
 
     // TODO: cannot make connection with the backend.
     // Try https://github.com/megasanjay/electron-flask
-    try {
-        const obj = {name: "John", age: 30, city: "New York"};
-        const requestOptions = {
-            method: "POST", // or 'PUT'
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify(obj),
-        }
-
-        let response = await fetch('http://127.0.0.1:5000/test', requestOptions);
-        if (response.ok) {
-            // let data = await response.json();
-            console.log("Backend says:", response.data);
-        } else {
-            handleErrors(response);
-        }
-    } catch (e) {
-        console.log(e);
-        alert(e);
-    }
+    axios.get(`${SERVER_URL}/`)
+    .then((response) => {
+        console.log(response.data);
+        console.log('server connected');
+    })
+    .catch((error) => {
+        console.error(error);
+    });
 
 }
 
