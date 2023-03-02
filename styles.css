@@ -1,3 +1,9 @@
+.titlebar {
+    height: 20px;
+    -webkit-app-region: drag;
+    -webkit-user-select: none;
+}
+
 body {
     background-color: #f0f5f5;
     font-family: 'DM Sans', sans-serif;
