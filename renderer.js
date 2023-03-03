@@ -6,6 +6,7 @@ var currentWriting = null;
 var coverLetterButton = null;
 var whyUsButton = null;
 var uploadResumeButton = null;
+var uploadResumeForm = null;
 var generateButton = null;
 var goBackButton = null;
 
@@ -35,8 +36,11 @@ apiSubmitButton.addEventListener("click", async event => {
     // Default
     selectCoverLetterBtn();
 
-    uploadResumeButton = waitUntilLoad('upload-resume');
-    uploadResumeButton.addEventListener('change', uploadResume);
+    // Upload resume submit
+    // uploadResumeButton = waitUntilLoad('upload-resume');
+    // uploadResumeButton.addEventListener('change', uploadResume);
+    uploadResumeForm = waitUntilLoad('upload-resume-form');
+    uploadResumeForm.addEventListener('submit', uploadResume);
 
     // Generate button click
     generateButton = waitUntilLoad('generate-btn');
@@ -59,17 +63,24 @@ function selectWhyUsBtn() {
     currentWriting = 'why-us';
 }
 
-async function uploadResume() {
-    // const file = this.files[0];
-    // let text = await file.text();
-    // console.log(text);
+async function uploadResume(event) {
+    event.preventDefault();
 
-    // TODO: cannot make connection with the backend.
-    // Try https://github.com/megasanjay/electron-flask
-    axios.get(`${SERVER_URL}/`)
+    // console.log(this.file);
+    // let resumeInput = document.getElementById('upload-resume');
+    // console.log(x.files);
+
+    let formData = new FormData();
+    formData.append("file", this.file.files[0]);
+    console.log(formData);
+
+    axios.post(`${SERVER_URL}/`, formData, {
+        headers: { 
+            "Content-Type": "multipart/form-data"
+        }
+    })
     .then((response) => {
         console.log(response.data);
-        console.log('server connected');
     })
     .catch((error) => {
         console.error(error);
