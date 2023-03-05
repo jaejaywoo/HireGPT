@@ -21,17 +21,14 @@ def extract_pdf_data(filename):
 def upload_file():
     if 'file' in request.files:
         file = request.files['file']
-        print(f'request file: {file}')
-        print(f'filename: {file.filename}')
 
         # Save the uploaded file to local dir
         filename = secure_filename(file.filename)
         filename = os.path.join(app.config["UPLOAD_FOLDER"], filename)
         file.save(filename)
 
+        # TODO: Do something with the extracted text
         text, metadata = extract_pdf_data(filename)
-        print(f'parsed metadata: {metadata}')
-        print(f'parsed text: {text}')
         return 'File uploaded successfully'
     
     return 'No file uploaded.'

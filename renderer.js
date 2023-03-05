@@ -37,8 +37,6 @@ apiSubmitButton.addEventListener("click", async event => {
     selectCoverLetterBtn();
 
     // Upload resume submit
-    // uploadResumeButton = waitUntilLoad('upload-resume');
-    // uploadResumeButton.addEventListener('change', uploadResume);
     uploadResumeForm = waitUntilLoad('upload-resume-form');
     uploadResumeForm.addEventListener('submit', uploadResume);
 
@@ -65,10 +63,6 @@ function selectWhyUsBtn() {
 
 async function uploadResume(event) {
     event.preventDefault();
-
-    // console.log(this.file);
-    // let resumeInput = document.getElementById('upload-resume');
-    // console.log(x.files);
 
     let formData = new FormData();
     formData.append("file", this.file.files[0]);
@@ -214,11 +208,3 @@ function generateWhyUsPrompt() {
     `${USER_BACKGROUND}`
 
 }
-
-// function generatePrompt_v2() {
-//     return `Think about the mission statement of ${COMPANY_NAME} ` +
-//     `and write a professional cover letter for ${JOB_POSITION} role. ` +
-//     `The cover letter must align the mission of ${COMPANY_NAME} ` +
-//     "with my background provided below:\n" +
-//     `${USER_BACKGROUND}`
-// }
