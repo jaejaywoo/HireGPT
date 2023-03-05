@@ -9,6 +9,7 @@ os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+app.config['MAX_CONTENT_LENGTH'] = 16 * 1000 * 1000
 
 
 # Define a function to extract text and metadata from a PDF file using the Tika parser
@@ -29,13 +30,11 @@ def upload_file():
         file.save(filename)
 
         text, metadata = extract_pdf_data(filename)
-        # Do something with the extracted text and metadata
         print(f'parsed metadata: {metadata}')
         print(f'parsed text: {text}')
-        return 'PDF file uploaded successfully'
-    else:
-        print(f'No file')
-    return "File upload complete!"
+        return 'File uploaded successfully'
+    
+    return 'No file uploaded.'
 
 if __name__ == '__main__':
     app.run(host='127.0.0.1', port=5000)
