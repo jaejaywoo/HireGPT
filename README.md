@@ -18,6 +18,16 @@ Install all the necessary dependencies:
 npm install
 ```
 
+Install Python dependencies:
+```
+pip install -r requirements.txt
+```
+
+Run Python backend server:
+```
+cd backend && flask run
+```
+
 Run the app:
 ```
 npm run start

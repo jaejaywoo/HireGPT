@@ -1,0 +1,24 @@
+aiohttp==3.8.4
+aiosignal==1.3.1
+async-timeout==4.0.2
+attrs==22.2.0
+certifi @ file:///private/var/folders/sy/f16zz6x50xz3113nwtb9bvq00000gp/T/abs_477u68wvzm/croot/certifi_1671487773341/work/certifi
+charset-normalizer==3.0.1
+click==8.1.3
+Flask==2.2.3
+frozenlist==1.3.3
+greenlet==2.0.2
+idna==3.4
+itsdangerous==2.1.2
+Jinja2==3.1.2
+MarkupSafe==2.1.2
+msgpack==1.0.4
+multidict==6.0.4
+openai==0.27.0
+pynvim==0.4.3
+requests==2.28.2
+tika==2.6.0
+tqdm==4.65.0
+urllib3==1.26.14
+Werkzeug==2.2.3
+yarl==1.8.2
