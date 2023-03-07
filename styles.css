@@ -114,6 +114,23 @@ textarea {
     color: #123693;
 }
 
+#upload-resume-btn:hover {
+    background-color: #d8e7fc;
+}
+
+#upload-resume-btn {
+    width: 30%;
+    padding: 5px;
+    background-color: #d2e4ff;
+    color: #123693;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    /* margin-top: 10px; */
+}
+
 button[type="submit"]:hover {
     background-color: #d8e7fc;
 }
