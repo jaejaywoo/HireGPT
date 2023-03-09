@@ -66,7 +66,6 @@ async function uploadResume(event) {
 
     let formData = new FormData();
     formData.append("file", this.file.files[0]);
-    console.log(formData);
 
     axios.post(`${SERVER_URL}/`, formData, {
         headers: { 
