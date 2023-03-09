@@ -12,7 +12,7 @@ const createWindow = () => {
   });
 
   win.loadFile('index.html');
-  win.webContents.openDevTools()  // Debugger
+  // win.webContents.openDevTools()  // Debugger
 
   // See more details at:
   // https://medium.com/red-buffer/integrating-python-flask-backend-with-electron-nodejs-frontend-8ac621d13f72
