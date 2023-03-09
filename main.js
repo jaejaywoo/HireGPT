@@ -1,4 +1,5 @@
 const { app, BrowserWindow } = require('electron');
+const path = require('path');
 
 const createWindow = () => {
   const win = new BrowserWindow({
@@ -40,3 +41,23 @@ app.on('window-all-closed', () => {
     app.quit();
   }
 });
+
+var pyProc = null;
+
+const createPyProc = () => {
+  let script = path.join(__dirname, 'backend', 'app.py');
+  pyProc = require('child_process').spawn('python', [script]);
+
+  if (pyProc != null) {
+    console.log(`Python process spawned. (pid: ${pyProc.pid})`);
+  }
+}
+
+const exitPyProc = () => {
+  pyProc.kill();
+  pyProc = null;
+  console.log('Python process killed.');
+}
+
+app.on('ready', createPyProc);
+app.on('will-quit', exitPyProc);

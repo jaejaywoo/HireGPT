@@ -67,7 +67,7 @@ async function uploadResume(event) {
     let formData = new FormData();
     formData.append("file", this.file.files[0]);
 
-    axios.post(`${SERVER_URL}/`, formData, {
+    axios.post(`${SERVER_URL}/resume`, formData, {
         headers: { 
             "Content-Type": "multipart/form-data"
         }

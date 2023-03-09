@@ -17,7 +17,7 @@ def extract_pdf_data(filename):
     parsed_pdf = parser.from_file(filename)
     return parsed_pdf['content'], parsed_pdf['metadata']
 
-@app.route('/', methods=['POST'])
+@app.route('/resume', methods=['POST'])
 def upload_file():
     if 'file' in request.files:
         file = request.files['file']
@@ -29,6 +29,8 @@ def upload_file():
 
         # TODO: Do something with the extracted text
         text, metadata = extract_pdf_data(filename)
+
+        
         return 'File uploaded successfully'
     
     return 'No file uploaded.'

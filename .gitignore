@@ -131,3 +131,9 @@ dist
 
 # Backend data
 backend/data
+data/
+
+# PyInstaller related
+build/
+dist/
+*.spec
