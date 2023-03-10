@@ -86,6 +86,9 @@ async function uploadResume(event) {
     })
     .then((response) => {
         console.log(response.data);
+        let text = response.data.choices[0].text.trim();
+        let userBackground = document.getElementById("user-background");
+        userBackground.value = text;
     })
     .catch((error) => {
         console.error(error);

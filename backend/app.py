@@ -18,7 +18,7 @@ def upload_apikey():
     data = request.get_json()
     if 'OPENAI_API_KEY' in data:
         openai.api_key = data['OPENAI_API_KEY']
-        return openai.Model.list()
+        return 'API key received'
     return 'No API key is received'
 
 # Define a function to extract text and metadata from a PDF file using the Tika parser
@@ -37,10 +37,23 @@ def upload_file():
         file.save(filename)
 
         # TODO: Do something with the extracted text
-        print('Extracting resume information...')
         text, metadata = extract_pdf_data(filename)
 
-        return 'File uploaded successfully'
+        prompt = f"""Here is my resume:
+{text}
+
+Summarize my resume by extracting the work experience section. Use first person pronouns and make it sound impressive.
+"""
+
+        response = openai.Completion.create(
+            model="text-davinci-003",
+            # prompt="Say this is a test.",
+            prompt=prompt,
+            max_tokens=1000,
+            temperature=0
+        )
+        # print(f"{response['choices'][0]['text']}", flush=True)
+        return response
     
     return 'No file uploaded.'
 
