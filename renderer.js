@@ -19,6 +19,8 @@ var JOB_POSITION = null;
 apiSubmitButton.addEventListener("click", async event => {
     // Get the API key from the user
     API_KEY_INFO = document.getElementById("api-key-txt").value;
+    uploadApiKey();
+    document.getElementById("api-key-txt").value = '';
 
     let mainPage = document.getElementById("main-page");
     let apiKeyPage = document.getElementById("api-key-page");
@@ -61,6 +63,16 @@ function selectWhyUsBtn() {
     currentWriting = 'why-us';
 }
 
+async function uploadApiKey() {
+    axios.post(`${SERVER_URL}/apikey`, { 'OPENAI_API_KEY': API_KEY_INFO })
+    .then((response) => {
+        console.log(response.data);
+    })
+    .catch((error) => {
+        console.error(error);
+    });
+}
+
 async function uploadResume(event) {
     event.preventDefault();
 
@@ -78,7 +90,6 @@ async function uploadResume(event) {
     .catch((error) => {
         console.error(error);
     });
-
 }
 
 function waitUntilLoad(id) {

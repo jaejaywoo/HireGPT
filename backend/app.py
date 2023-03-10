@@ -1,4 +1,5 @@
-import os 
+import os
+import openai
 
 from tika import parser
 from flask import Flask, request
@@ -11,6 +12,14 @@ app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 app.config['MAX_CONTENT_LENGTH'] = 16 * 1000 * 1000
 
+
+@app.route('/apikey', methods=['POST'])
+def upload_apikey():
+    data = request.get_json()
+    if 'OPENAI_API_KEY' in data:
+        openai.api_key = data['OPENAI_API_KEY']
+        return openai.Model.list()
+    return 'No API key is received'
 
 # Define a function to extract text and metadata from a PDF file using the Tika parser
 def extract_pdf_data(filename):
@@ -28,9 +37,9 @@ def upload_file():
         file.save(filename)
 
         # TODO: Do something with the extracted text
+        print('Extracting resume information...')
         text, metadata = extract_pdf_data(filename)
 
-        
         return 'File uploaded successfully'
     
     return 'No file uploaded.'
