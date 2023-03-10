@@ -46,10 +46,17 @@ var pyProc = null;
 
 const createPyProc = () => {
   let script = path.join(__dirname, 'backend', 'app.py');
-  pyProc = require('child_process').spawn('python', [script]);
+  pyProc = require('child_process').spawn('python', [script], { stdio: 'pipe' });
 
   if (pyProc != null) {
     console.log(`Python process spawned. (pid: ${pyProc.pid})`);
+
+    pyProc.stdout.on('data', (data) => {
+      console.log('[Backend STDOUT] ' + data.toString('utf8'));
+    });
+    pyProc.stderr.on('data', (data) => {
+      console.log('[Backend STDERR] ' + data.toString('utf8'));
+    });
   }
 }
 
