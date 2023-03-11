@@ -161,16 +161,3 @@ function createParagraphs(text) {
         answerDiv.appendChild(p);
     }
 }
-
-function handleErrors(response) {
-    switch (response.status) {
-        case 401: // 401: Unauthorized: API key is wrong
-            throw new Error('Please double-check your API key.');
-        case 429: // 429: Too Many Requests: Need to pay
-            throw new Error('You exceeded your current quota, please check your plan and billing details.');
-        case 405: // 405: Wrong HTTP method
-            throw new Error('Your current HTTP method is not compatible with the request.');
-        default:
-            throw new Error(`Error occurred (error code: ${response.status})`);
-    }
-}

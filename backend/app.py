@@ -37,15 +37,10 @@ def upload_file():
         filename = os.path.join(app.config["UPLOAD_FOLDER"], filename)
         file.save(filename)
 
-        # TODO: Do something with the extracted text
-        text, metadata = extract_pdf_data(filename)
+        # Parse resume pdf and create background summary
+        text, _ = extract_pdf_data(filename)
 
-        prompt = f"""Here is my resume:
-{text}
-
-Summarize my resume by extracting the work experience section. Use first person pronouns and make it sound impressive.
-"""
-
+        prompt = generateResumeSummarizationPrompt(text)
         response = openai.Completion.create(
             model="text-davinci-003",
             # prompt="Say this is a test.",
@@ -53,7 +48,6 @@ Summarize my resume by extracting the work experience section. Use first person 
             max_tokens=1000,
             temperature=0
         )
-        # print(f"{response['choices'][0]['text']}", flush=True)
         return response
     
     return 'No file uploaded.'
@@ -84,6 +78,12 @@ def request_completion():
     return response
 
 
+def generateResumeSummarizationPrompt(resume):
+    return f"""Summarize my resume by extracting the work experience section. Use first person pronouns and make it sound impressive.
+Here is my resume:
+{resume}
+"""
+
 def generateCoverLetterPrompt(company_name, user_background, role_description, job_position):
     return f"""Write a professional cover letter for the {job_position} position at {company_name}.
 Here is the role description:
@@ -101,7 +101,6 @@ This is the role description:
 Here is my background:
 {user_background}
 """
-
 
 if __name__ == '__main__':
     app.run(host='127.0.0.1', port=5000)
