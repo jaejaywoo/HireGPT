@@ -68,7 +68,7 @@ async function uploadApiKey() {
         let response = await axios.post(`${SERVER_URL}/apikey`, { 'OPENAI_API_KEY': API_KEY_INFO });
         console.log(response.data);
     } catch (e) {
-        console.log(e);
+        console.error(e);
         alert(e);
     }
 }
@@ -156,7 +156,7 @@ async function requestCompletion(prompt) {
             handleErrors(response);
         }
     } catch (e) {
-        console.log(e);
+        console.error(e);
         alert(e);
     }
 }
