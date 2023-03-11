@@ -127,57 +127,26 @@ async function onClickGenerateButton() {
     } else if (!JOB_POSITION) {
         alert('⚠️ You did not specify which position you are applying for! Please write down the job position.');
     } else {
-        // Get response from OpenAPI
-        let prompt = null;
-        if (currentWriting == "cover-letter") {
-            prompt = generateCoverLetterPrompt();
-        } else if (currentWriting == "why-us") {
-            prompt = generateWhyUsPrompt();
-        } else {
-            alert('⚠️ Unknown writing format!');
-        }
-
-        let response = await requestCompletion(prompt);
-        createParagraphs(response);
-
-        console.log(`Prompt: ${prompt}`);
+        let response = await requestCompletion();
+        createParagraphs(response.data.choices[0].text);
     }
 }
 
-async function requestCompletion(prompt) {
+async function requestCompletion() {
     try {
-        let requestOptions = getRequestOptions(prompt);
-        let response = await fetch("https://api.openai.com/v1/completions", requestOptions);
-
-        if (response.ok) {
-            let data = await response.json();
-            return data.choices[0].text;
-        } else {
-            handleErrors(response);
+        const data = {
+            'company_name': COMPANY_NAME,
+            'role_description': ROLE_DESCRIPTION,
+            'user_background': USER_BACKGROUND,
+            'job_position': JOB_POSITION,
+            'question_type': currentWriting
         }
+        let response = await axios.post(`${SERVER_URL}/completion`, data);
+        return response;
     } catch (e) {
         console.error(e);
         alert(e);
     }
-}
-
-function getRequestOptions(prompt) {
-    const params = {
-        "prompt": prompt,
-        "model": "text-davinci-003",
-        "max_tokens": 700,
-        "temperature": 0.2,
-        "n": 1,
-    }
-    const requestOptions = {
-        method: "POST",
-        headers: {
-            "Authorization": "Bearer " + API_KEY_INFO,
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify(params)
-    }
-    return requestOptions
 }
 
 function createParagraphs(text) {
@@ -204,21 +173,4 @@ function handleErrors(response) {
         default:
             throw new Error(`Error occurred (error code: ${response.status})`);
     }
-}
-
-function generateCoverLetterPrompt() {
-    return `Write a professional cover letter for the ${JOB_POSITION} position at ${COMPANY_NAME}.` +
-    "\n\nHere is the role description:\n" +
-    `${ROLE_DESCRIPTION}` +
-    "\n\nThis is my background:\n" +
-    `${USER_BACKGROUND}`
-}
-
-function generateWhyUsPrompt() {
-    return `Explain why I would be a great fit for the ${JOB_POSITION} position at ${COMPANY_NAME}.` +
-    "\n\nThis is the role description:\n" +
-    `${ROLE_DESCRIPTION}` +
-    "\n\nHere is my background:\n" +
-    `${USER_BACKGROUND}`
-
 }
