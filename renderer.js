@@ -76,23 +76,24 @@ async function uploadApiKey() {
 async function uploadResume(event) {
     event.preventDefault();
 
-    let formData = new FormData();
-    formData.append("file", this.file.files[0]);
+    try {
+        let formData = new FormData();
+        formData.append("file", this.file.files[0]);
 
-    axios.post(`${SERVER_URL}/resume`, formData, {
-        headers: { 
-            "Content-Type": "multipart/form-data"
-        }
-    })
-    .then((response) => {
+        let response = await axios.post(`${SERVER_URL}/resume`, formData, {
+            headers: { 
+                "Content-Type": "multipart/form-data"
+            }
+        });
+        
         console.log(response.data);
         let text = response.data.choices[0].text.trim();
         let userBackground = document.getElementById("user-background");
         userBackground.value = text;
-    })
-    .catch((error) => {
-        console.error(error);
-    });
+    } catch (e) {
+        console.error(e);
+        alert(e);
+    }
 }
 
 function waitUntilLoad(id) {
