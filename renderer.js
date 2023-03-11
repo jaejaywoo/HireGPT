@@ -64,13 +64,13 @@ function selectWhyUsBtn() {
 }
 
 async function uploadApiKey() {
-    axios.post(`${SERVER_URL}/apikey`, { 'OPENAI_API_KEY': API_KEY_INFO })
-    .then((response) => {
+    try {
+        let response = await axios.post(`${SERVER_URL}/apikey`, { 'OPENAI_API_KEY': API_KEY_INFO });
         console.log(response.data);
-    })
-    .catch((error) => {
-        console.error(error);
-    });
+    } catch (e) {
+        console.log(e);
+        alert(e);
+    }
 }
 
 async function uploadResume(event) {
