@@ -1,6 +1,7 @@
 const SERVER_URL = "http://127.0.0.1:5000";
 
 const apiSubmitButton = document.getElementById("api-key-btn");
+var API_KEY_INFO = null;
 
 var currentWriting = null;
 var coverLetterButton = null;
@@ -10,11 +11,6 @@ var uploadResumeForm = null;
 var generateButton = null;
 var goBackButton = null;
 
-var API_KEY_INFO = null;
-var COMPANY_NAME = null;
-var ROLE_DESCRIPTION = null;
-var USER_BACKGROUND = null;
-var JOB_POSITION = null;
 
 apiSubmitButton.addEventListener("click", async event => {
     // Get the API key from the user
@@ -109,31 +105,36 @@ async function onClickGoBackButton() {
 
 async function onClickGenerateButton() {
     // Prep company & user info
-    COMPANY_NAME = document.getElementById("company-info").value;
-    ROLE_DESCRIPTION = document.getElementById("role-description").value;
-    USER_BACKGROUND = document.getElementById("user-background").value;
-    JOB_POSITION = document.getElementById("job-position").value;
+    let company_name = document.getElementById("company-info").value;
+    let role_description = document.getElementById("role-description").value;
+    let user_background = document.getElementById("user-background").value;
+    let job_position = document.getElementById("job-position").value;
 
-    if (!COMPANY_NAME) {
+    if (!company_name) {
         alert('⚠️ You did not specify the company name! Please write the name of the company.');
-    } else if (!ROLE_DESCRIPTION) {
+    } else if (!role_description) {
         alert('⚠️ The role description section is missing! Please tell us more about the role you are applying for.');
-    } else if (!USER_BACKGROUND) {
+    } else if (!user_background) {
         alert('⚠️ You forgot to tell me your background! I cannot generate text without knowing who you are. Please write a brief summary of your background.');
-    } else if (!JOB_POSITION) {
+    } else if (!job_position) {
         alert('⚠️ You did not specify which position you are applying for! Please write down the job position.');
     } else {
-        let response = await requestCompletion();
+        let response = await requestCompletion(
+            company_name=company_name,
+            role_description=role_description,
+            user_background=user_background,
+            job_position=job_position
+        );
         createParagraphs(response.data.choices[0].text);
     }
 }
 
-async function requestCompletion() {
+async function requestCompletion(company_name, role_description, user_background, job_position) {
     const info = {
-        'company_name': COMPANY_NAME,
-        'role_description': ROLE_DESCRIPTION,
-        'user_background': USER_BACKGROUND,
-        'job_position': JOB_POSITION,
+        'company_name': company_name,
+        'role_description': role_description,
+        'user_background': user_background,
+        'job_position': job_position,
         'question_type': currentWriting
     }
     let response = await makeRequest(
