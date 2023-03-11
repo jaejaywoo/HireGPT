@@ -1,6 +1,6 @@
 # HireGPT
 
-![screenshot](screenshot.png)
+![screenshot](assets/screenshot.png)
 
 No one (ever) enjoys writing job applications 🙅🏻‍♂️ Just type in a few details like company name, your background, and job position, then the HireGPT will use OpenAI GPT model to generate the writings needed in your next job application (e.g. message to hiring manager, cover letter, etc).
 
