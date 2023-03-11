@@ -43,7 +43,7 @@ def upload_file():
         prompt = generateResumeSummarizationPrompt(text)
         response = openai.Completion.create(
             model="text-davinci-003",
-            # prompt="Say this is a test.",
+            # prompt="Say this is a test.",  # XXX debugging purpose
             prompt=prompt,
             max_tokens=1000,
             temperature=0
@@ -70,7 +70,7 @@ def request_completion():
 
     response = openai.Completion.create(
         model="text-davinci-003",
-        # prompt="Say this is a test.",
+        # prompt="Say this is a test.",  # XXX debugging purpose
         prompt=prompt,
         max_tokens=1000,
         temperature=0

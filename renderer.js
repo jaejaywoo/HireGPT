@@ -64,36 +64,32 @@ function selectWhyUsBtn() {
 }
 
 async function uploadApiKey() {
-    try {
-        let response = await axios.post(`${SERVER_URL}/apikey`, { 'OPENAI_API_KEY': API_KEY_INFO });
-        console.log(response.data);
-    } catch (e) {
-        console.error(e);
-        alert(e);
-    }
+    let response = await makeRequest(
+        method='post',
+        url=`${SERVER_URL}/apikey`,
+        data={ 'OPENAI_API_KEY': API_KEY_INFO }
+    );
+    console.log(response.data);
 }
 
 async function uploadResume(event) {
     event.preventDefault();
 
-    try {
-        let formData = new FormData();
-        formData.append("file", this.file.files[0]);
+    let formData = new FormData();
+    formData.append("file", this.file.files[0]);
 
-        let response = await axios.post(`${SERVER_URL}/resume`, formData, {
-            headers: { 
-                "Content-Type": "multipart/form-data"
-            }
-        });
-        
-        console.log(response.data);
-        let text = response.data.choices[0].text.trim();
-        let userBackground = document.getElementById("user-background");
-        userBackground.value = text;
-    } catch (e) {
-        console.error(e);
-        alert(e);
-    }
+    let response = await makeRequest(
+        method='post',
+        url=`${SERVER_URL}/resume`,
+        data=formData,
+        headers={ "Content-Type": "multipart/form-data" }
+    );
+    
+    // Fill in the user background
+    console.log(response.data);
+    let text = response.data.choices[0].text.trim();
+    let userBackground = document.getElementById("user-background");
+    userBackground.value = text;
 }
 
 function waitUntilLoad(id) {
@@ -133,15 +129,30 @@ async function onClickGenerateButton() {
 }
 
 async function requestCompletion() {
+    const info = {
+        'company_name': COMPANY_NAME,
+        'role_description': ROLE_DESCRIPTION,
+        'user_background': USER_BACKGROUND,
+        'job_position': JOB_POSITION,
+        'question_type': currentWriting
+    }
+    let response = await makeRequest(
+        method='post',
+        url=`${SERVER_URL}/completion`,
+        data=info
+    );
+    return response;
+}
+
+async function makeRequest(method, url, data, ...extras) {
     try {
-        const data = {
-            'company_name': COMPANY_NAME,
-            'role_description': ROLE_DESCRIPTION,
-            'user_background': USER_BACKGROUND,
-            'job_position': JOB_POSITION,
-            'question_type': currentWriting
+        const requestConfig = {
+            method: method,
+            url: url,
+            data: data,
+            ...extras
         }
-        let response = await axios.post(`${SERVER_URL}/completion`, data);
+        let response = await axios(requestConfig);
         return response;
     } catch (e) {
         console.error(e);
