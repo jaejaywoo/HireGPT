@@ -82,10 +82,9 @@ async function uploadResume(event) {
     );
     
     // Fill in the user background
-    console.log(response.data);
-    let text = response.data.choices[0].text.trim();
+    console.log(response);
     let userBackground = document.getElementById("user-background");
-    userBackground.value = text;
+    userBackground.value = response.data.text;
 }
 
 function waitUntilLoad(id) {
