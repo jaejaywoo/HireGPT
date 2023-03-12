@@ -137,3 +137,6 @@ data/
 build/
 dist/
 *.spec
+
+# Misc.
+resumes/
