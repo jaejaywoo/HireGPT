@@ -39,6 +39,7 @@ def upload_file():
 
         # Parse resume pdf and create background summary
         text, _ = extract_pdf_data(filename)
+        text = text.strip()
 
         prompt = generateResumeSummarizationPrompt(text)
         response = openai.Completion.create(
