@@ -49,7 +49,10 @@ def upload_file():
             max_tokens=1000,
             temperature=0
         )
-        return response
+
+        return {
+            'text': response['choices'][0]['text'].strip()
+        }
     
     return 'No file uploaded.'
 
