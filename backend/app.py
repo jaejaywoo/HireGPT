@@ -12,6 +12,12 @@ app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 app.config['MAX_CONTENT_LENGTH'] = 16 * 1000 * 1000
 
+# OpenAI configurations
+PARAMS = {
+    'model': "gpt-3.5-turbo",
+    'temperature': 0.2,
+    'max_tokens': 1000,
+}
 
 @app.route('/apikey', methods=['POST'])
 def upload_apikey():
@@ -42,16 +48,23 @@ def upload_file():
         text = text.strip()
 
         prompt = generateResumeSummarizationPrompt(text)
-        response = openai.Completion.create(
-            model="text-davinci-003",
-            # prompt="Say this is a test.",  # XXX debugging purpose
-            prompt=prompt,
-            max_tokens=1000,
-            temperature=0
-        )
+        # response = openai.Completion.create(
+        #     # prompt="Say this is a test.",  # XXX debugging purpose
+        #     prompt=prompt,
+        #     **PARAMS
+        # )
+        # return {
+        #     'text': response['choices'][0]['text'].strip()
+        # }
 
+        # XXX ChatGPT model
+        response = openai.ChatCompletion.create(
+            # messages=[{'role': 'user', 'content': 'Say this is test.'}],  # XXX debugging purpose
+            messages=[{'role': 'user', 'content': prompt}],
+            **PARAMS
+        )
         return {
-            'text': response['choices'][0]['text'].strip()
+            'text': response['choices'][0]['message']['content'].strip()
         }
     
     return 'No file uploaded.'
@@ -72,14 +85,23 @@ def request_completion():
     else:
         raise ValueError("Unknown question type.")
 
-    response = openai.Completion.create(
-        model="text-davinci-003",
-        # prompt="Say this is a test.",  # XXX debugging purpose
-        prompt=prompt,
-        max_tokens=1000,
-        temperature=0
+    # response = openai.Completion.create(
+    #     # prompt="Say this is a test.",  # XXX debugging purpose
+    #     prompt=prompt,
+    #     **PARAMS
+    # )
+    # return response
+
+    print(f'{prompt}', flush=True)
+    # XXX ChatGPT model
+    response = openai.ChatCompletion.create(
+        # messages=[{'role': 'user', 'content': 'Say this is test.'}],  # XXX debugging purpose
+        messages=[{'role': 'user', 'content': prompt}],
+        **PARAMS
     )
-    return response
+    return {
+        'text': response['choices'][0]['message']['content'].strip()
+    }
 
 
 def generateResumeSummarizationPrompt(resume):
