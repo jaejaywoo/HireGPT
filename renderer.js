@@ -124,7 +124,8 @@ async function onClickGenerateButton() {
             user_background=user_background,
             job_position=job_position
         );
-        createParagraphs(response.data.choices[0].text);
+        console.log(response);
+        createParagraphs(response.data.text);
     }
 }
 
