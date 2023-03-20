@@ -18,11 +18,6 @@ Install all the necessary dependencies:
 npm install
 ```
 
-Install Python dependencies:
-```
-pip install -r requirements.txt
-```
-
 Run the app:
 ```
 npm run start
