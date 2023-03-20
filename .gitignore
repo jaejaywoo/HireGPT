@@ -135,8 +135,8 @@ data/
 
 # PyInstaller related
 build/
-dist/
 *.spec
+clean.sh
 
 # Misc.
 resumes/

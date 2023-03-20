@@ -45,10 +45,14 @@ app.on('window-all-closed', () => {
 var pyProc = null;
 
 const createPyProc = () => {
-  let script = path.join(__dirname, 'backend', 'app.py');
-  pyProc = require('child_process').spawn('python', [script], { stdio: 'pipe' });
+  // let script = path.join(__dirname, 'backend', 'app.py');
+  // pyProc = require('child_process').spawn('python', [script], { stdio: 'pipe' });
+
+  let script = path.join(__dirname, 'pydist', 'app');
+  pyProc = require('child_process').execFile(script);
 
   if (pyProc != null) {
+    // console.log(pyProc);
     console.log(`Python process spawned. (pid: ${pyProc.pid})`);
 
     pyProc.stdout.on('data', (data) => {
