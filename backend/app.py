@@ -59,8 +59,8 @@ def upload_file():
 
         # XXX ChatGPT model
         response = openai.ChatCompletion.create(
-            # messages=[{'role': 'user', 'content': 'Say this is test.'}],  # XXX debugging purpose
-            messages=[{'role': 'user', 'content': prompt}],
+            messages=[{'role': 'user', 'content': 'Say this is test.'}],  # XXX debugging purpose
+            # messages=[{'role': 'user', 'content': prompt}],
             **PARAMS
         )
         return {
@@ -95,8 +95,8 @@ def request_completion():
     print(f'{prompt}', flush=True)
     # XXX ChatGPT model
     response = openai.ChatCompletion.create(
-        # messages=[{'role': 'user', 'content': 'Say this is test.'}],  # XXX debugging purpose
-        messages=[{'role': 'user', 'content': prompt}],
+        messages=[{'role': 'user', 'content': 'Say this is test.'}],  # XXX debugging purpose
+        # messages=[{'role': 'user', 'content': prompt}],
         **PARAMS
     )
     return {
