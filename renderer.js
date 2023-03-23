@@ -173,3 +173,14 @@ function createParagraphs(text) {
         answerDiv.appendChild(p);
     }
 }
+
+function showSpinner() {
+    document.getElementById('spinner').style.zIndex = 10;
+}
+
+function hideSpinner() {
+    document.getElementById('spinner').style.display = 'none';
+}
+
+showSpinner();
+setTimeout(hideSpinner, 4000); // Hide spinner after 3 seconds

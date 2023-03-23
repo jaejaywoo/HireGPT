@@ -54,30 +54,12 @@
         </div>
     </div>
 
-    <!-- Spinner -->
+    <!-- Loading Spinner -->
     <div id="spinner">
         <div class="lds-ellipsis">
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
+            <div></div><div></div><div></div><div></div>
         </div>
     </div>
-    <script>
-        function showSpinner() {
-            // document.querySelector('.lds-ellipsis').style.display = 'inline-block';
-            document.getElementById('spinner').style.zIndex = 10;
-        }
-
-        function hideSpinner() {
-            document.getElementById('spinner').style.display = 'none';
-        }
-      
-        // Example usage:
-        showSpinner();
-        setTimeout(hideSpinner, 3000); // Hide spinner after 3 seconds
-      </script>
-
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>   <!-- Import axios -->
     <script src="./renderer.js"></script>
 </body>
