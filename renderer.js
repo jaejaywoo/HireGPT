@@ -1,6 +1,7 @@
 const SERVER_URL = "http://127.0.0.1:8000";
 
 const apiSubmitButton = document.getElementById("api-key-btn");
+const loadingSpinner = document.getElementById("spinner");
 var API_KEY_INFO = null;
 
 var currentWriting = null;
@@ -146,6 +147,7 @@ async function requestCompletion(company_name, role_description, user_background
 }
 
 async function makeRequest(method, url, data, ...extras) {
+    showSpinner();
     try {
         const requestConfig = {
             method: method,
@@ -158,6 +160,8 @@ async function makeRequest(method, url, data, ...extras) {
     } catch (e) {
         console.error(e);
         alert(e);
+    } finally {
+        hideSpinner();
     }
 }
 
@@ -175,11 +179,12 @@ function createParagraphs(text) {
 }
 
 function showSpinner() {
-    document.getElementById('spinner').style.zIndex = 10;
+    loadingSpinner.style.display = 'flex';
+    loadingSpinner.style.zIndex = 10;
 }
 
 function hideSpinner() {
-    document.getElementById('spinner').style.display = 'none';
+    loadingSpinner.style.display = 'none';
 }
 
 showSpinner();
