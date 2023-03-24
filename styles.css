@@ -186,6 +186,7 @@ input[type=text] {
 
 
 /* ------------------- Loading Spinner ------------------- */
+/* from: https://loading.io/css/ */
 #spinner {
     position: fixed;
     z-index: 1;
