@@ -48,19 +48,9 @@ def upload_file():
         text = text.strip()
 
         prompt = generateResumeSummarizationPrompt(text)
-        # response = openai.Completion.create(
-        #     # prompt="Say this is a test.",  # XXX debugging purpose
-        #     prompt=prompt,
-        #     **PARAMS
-        # )
-        # return {
-        #     'text': response['choices'][0]['text'].strip()
-        # }
-
-        # XXX ChatGPT model
         response = openai.ChatCompletion.create(
-            messages=[{'role': 'user', 'content': 'Say this is test.'}],  # XXX debugging purpose
-            # messages=[{'role': 'user', 'content': prompt}],
+            # messages=[{'role': 'user', 'content': 'Say this is test.'}],  # XXX debugging purpose
+            messages=[{'role': 'user', 'content': prompt}],
             **PARAMS
         )
         return {
@@ -85,18 +75,9 @@ def request_completion():
     else:
         raise ValueError("Unknown question type.")
 
-    # response = openai.Completion.create(
-    #     # prompt="Say this is a test.",  # XXX debugging purpose
-    #     prompt=prompt,
-    #     **PARAMS
-    # )
-    # return response
-
-    print(f'{prompt}', flush=True)
-    # XXX ChatGPT model
     response = openai.ChatCompletion.create(
-        messages=[{'role': 'user', 'content': 'Say this is test.'}],  # XXX debugging purpose
-        # messages=[{'role': 'user', 'content': prompt}],
+        # messages=[{'role': 'user', 'content': 'Say this is test.'}],  # XXX debugging purpose
+        messages=[{'role': 'user', 'content': prompt}],
         **PARAMS
     )
     return {
