@@ -8,7 +8,24 @@ No one (ever) enjoys writing job applications 🙅🏻‍♂️ Just type in a f
 
 # How to use
 
+## 1 Install the app
 1. Go to Releases and download the `zip` file.
 2. Unzip the downloaded file.
 3. Click/run `app` executable.
 4. Click/run `HireGPT` app.
+
+## 2 Manual installation
+Download the Github repo:
+```
+git clone https://github.com/jaejaywoo/HireGPT.git
+```
+
+Install all the necessary dependencies:
+```
+npm install
+```
+
+Run the app:
+```
+npm run start
+```
