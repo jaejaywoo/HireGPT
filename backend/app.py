@@ -50,7 +50,10 @@ def upload_file():
         prompt = generateResumeSummarizationPrompt(text)
         response = openai.ChatCompletion.create(
             # messages=[{'role': 'user', 'content': 'Say this is test.'}],  # XXX debugging purpose
-            messages=[{'role': 'user', 'content': prompt}],
+            messages=[
+                {"role": "system", "content": "You are a helpful assistant that summarizes professional work experience."},
+                {'role': 'user', 'content': prompt}
+            ],
             **PARAMS
         )
         return {
@@ -77,7 +80,10 @@ def request_completion():
 
     response = openai.ChatCompletion.create(
         # messages=[{'role': 'user', 'content': 'Say this is test.'}],  # XXX debugging purpose
-        messages=[{'role': 'user', 'content': prompt}],
+        messages=[
+            {"role": "system", "content": "You are a helpful job application assistant."},
+            {'role': 'user', 'content': prompt}
+        ],
         **PARAMS
     )
     return {
@@ -91,7 +97,7 @@ def generateResumeSummarizationPrompt(resume):
 """
 
 def generateCoverLetterPrompt(company_name, user_background, role_description, job_position):
-    return f"""Write a professional cover letter for the {job_position} position at {company_name}.
+    return f"""Write a succinct and impressive cover letter for the {job_position} position at {company_name}. Make sure to be concise and specific.
 Here is the role description:
 {role_description}
 
@@ -100,7 +106,7 @@ This is my background:
 """
 
 def generateWhyUsPrompt(company_name, user_background, role_description, job_position):
-    return f"""Explain why I would be a great fit for the ${job_position} position at ${company_name}.
+    return f"""Given the following descriptions, write why I would be a great fit for the ${job_position} position at ${company_name} using first person pronouns. Make it succinct and impressive. You can use the role description and my background as a starting point
 This is the role description:
 {role_description}
 
