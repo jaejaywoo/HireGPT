@@ -86,8 +86,7 @@ def request_completion():
 
 
 def generateResumeSummarizationPrompt(resume):
-    return f"""Summarize my resume by extracting the work experience section. Use first person pronouns and make it sound impressive.
-Here is my resume:
+    return f"""Summarize the following resume by extracting the work experience section. Use first person pronouns and make it succinct and impressive:
 {resume}
 """
 
