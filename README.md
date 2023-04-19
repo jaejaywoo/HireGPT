@@ -8,11 +8,9 @@ No one (ever really) enjoys writing job applications 🙅🏻‍♂️ Just type
 
 # How to use
 
-## 1 Install the app
+## 1 Install the app (⚠️ MacOS Only)
 1. Go to Releases and download the `zip` file.
-2. Unzip the downloaded file.
-3. Click/run `app` executable.
-4. Click/run `HireGPT` app.
+2. Unzip & run by clicking the `HireGPT` app.
 
 ## 2 Manual installation
 Download the Github repo:
