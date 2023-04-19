@@ -5,7 +5,7 @@ from tika import parser
 from flask import Flask, request
 from werkzeug.utils import secure_filename
 
-UPLOAD_FOLDER = 'data'
+UPLOAD_FOLDER = '/tmp/hireGPT/data'
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 
 app = Flask(__name__)
