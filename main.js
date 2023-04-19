@@ -1,4 +1,5 @@
 const { app, BrowserWindow } = require('electron');
+const fs = require('fs');
 const path = require('path');
 
 const createWindow = () => {
@@ -39,14 +40,25 @@ const createPyProc = () => {
   pyProc = require('child_process').execFile(script);
 
   if (pyProc != null) {
-    console.log(`Python process spawned. (pid: ${pyProc.pid})`);
+    var logStream = fs.createWriteStream('/tmp/logFile.log', {flags: 'a'});
 
-    pyProc.stdout.on('data', (data) => {
-      console.log('[Backend STDOUT] ' + data.toString('utf8'));
-    });
-    pyProc.stderr.on('data', (data) => {
-      console.log('[Backend STDERR] ' + data.toString('utf8'));
-    });
+    fs.writeFile(
+      '/tmp/logFile.log',
+      `Python process spawned. (pid: ${pyProc.pid})`,
+      { flag: 'a' },
+      err => {}
+    );
+
+    pyProc.stdout.pipe(logStream);
+    pyProc.stderr.pipe(logStream);
+
+  } else {
+    fs.writeFile(
+      '/tmp/logFile.log',
+      'Python process failed to spawn.',
+      { flag: 'a' },
+      err => {}
+    );
   }
 }
 
