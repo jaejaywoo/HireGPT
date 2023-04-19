@@ -11,11 +11,11 @@
     "make": "electron-forge make"
   },
   "devDependencies": {
-    "@electron-forge/cli": "^6.0.5",
-    "@electron-forge/maker-deb": "^6.0.5",
-    "@electron-forge/maker-rpm": "^6.0.5",
-    "@electron-forge/maker-squirrel": "^6.0.5",
-    "@electron-forge/maker-zip": "^6.0.5",
+    "@electron-forge/cli": "^6.1.1",
+    "@electron-forge/maker-deb": "^6.1.1",
+    "@electron-forge/maker-rpm": "^6.1.1",
+    "@electron-forge/maker-squirrel": "^6.1.1",
+    "@electron-forge/maker-zip": "^6.1.1",
     "electron": "^23.0.0"
   },
   "dependencies": {
