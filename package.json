@@ -1,6 +1,6 @@
 {
   "name": "HireGPT",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Job application made easy with HireGPT 😎 Powered by OpenAI GPT model.",
   "main": "main.js",
   "author": "Hyunjae Woo",
